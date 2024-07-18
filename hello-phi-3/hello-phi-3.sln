@@ -5,6 +5,8 @@ VisualStudioVersion = 17.9.34902.65
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "hello-phi-3", "hello-phi-3\hello-phi-3.csproj", "{235D260C-AC42-4362-B4A0-C70AD465818F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "hello-phi-3.consoleapp", "hello-phi-3.consoleapp\hello-phi-3.consoleapp.csproj", "{2F640B28-C4FB-4B53-BA7F-C110CA9B1613}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{235D260C-AC42-4362-B4A0-C70AD465818F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{235D260C-AC42-4362-B4A0-C70AD465818F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{235D260C-AC42-4362-B4A0-C70AD465818F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F640B28-C4FB-4B53-BA7F-C110CA9B1613}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F640B28-C4FB-4B53-BA7F-C110CA9B1613}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F640B28-C4FB-4B53-BA7F-C110CA9B1613}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F640B28-C4FB-4B53-BA7F-C110CA9B1613}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
