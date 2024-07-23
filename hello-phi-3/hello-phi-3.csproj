@@ -13,13 +13,5 @@
     <PackageReference Include="Microsoft.ML.OnnxRuntimeGenAI.Cuda" Version="[0.4.0-dev]" Condition=" '$(Configuration)' == 'Debug_Cuda' OR '$(Configuration)' == 'Release_Cuda' " />
     <PackageReference Include="Microsoft.ML.OnnxRuntimeGenAI.DirectML" Version="[0.4.0-dev]" Condition=" '$(Configuration)' == 'Debug_DirectML' OR '$(Configuration)' == 'Release_DirectML' " />
   </ItemGroup>
-  
-  <ItemGroup>
-    <None Include="$(SolutionDir)\models\**">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <Visible>false</Visible>
-      <LinkBase>"phi-3\"</LinkBase>
-    </None>
-  </ItemGroup> 
-   
+     
 </Project>
