@@ -30,12 +30,16 @@ huggingface-cli download microsoft/Phi-3-mini-4k-instruct-onnx --include cpu_and
 ```
 move models\cpu_and_mobile\cpu-int4-rtn-block-32-acc-level-4 models\phi-3
 ```
-4. Extra... // TODO
+
+5. Build project:
 
 ```
-dotnet run .\HelloPhi.csproj -c Release
+dotnet build .\hello-phi-3.consoleapp\hello-phi-3.consoleapp.csproj -c Release
+```
+6. Run example:
 
-.\bin\Release\net6.0\HelloPhi.exe -m .\bin\Release\net6.0\models\phi-3 -i
+```
+.\hello-phi-3.consoleapp\bin\Release\net8.0\hello-phi-3.consoleapp.exe -i -m .\models\phi-3\
 ```
 
 # B. Link
