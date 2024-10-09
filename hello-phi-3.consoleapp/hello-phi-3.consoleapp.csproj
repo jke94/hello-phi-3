@@ -6,7 +6,6 @@
     <RootNamespace>hello_phi_3.consoleapp</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-	<Configurations>Debug;Release;Debug_Cuda;Release_Cuda;Debug_DirectML;Release_DirectML</Configurations>
   </PropertyGroup>
 
   <ItemGroup>
