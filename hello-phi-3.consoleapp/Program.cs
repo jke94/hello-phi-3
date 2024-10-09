@@ -2,89 +2,83 @@
 {
     #region using
 
+    using CommandLine;
     using hello_phi_3;
+    using System.Collections;
 
     #endregion
 
     public class Program
     {
+        #region Public methods
+
         public static void Main(string[] args)
         {
-            Console.WriteLine("Usage:");
-            Console.WriteLine("  -m model_path");
-            Console.WriteLine("  -i (optional): Intereactive mode");
-                  
-            uint i = 0;
-            bool intereactive = false;
-            string modelPath = string.Empty;
+            Parser.Default.ParseArguments<CommandLineOptions>(args)
+                .WithParsed(Run)
+                .WithNotParsed(HandleParseError);
+        }
 
-            while (i < args.Length)
+        #endregion
+
+        #region Private methods
+
+        private static void Run(CommandLineOptions opts)
+        {
+            if (string.IsNullOrEmpty(opts.ModelPath))
             {
-                var arg = args[i];
-                if (arg == "-i")
-                {
-                    intereactive = true;
-                }
-                else if (arg == "-m")
-                {
-                    if (i + 1 < args.Length)
-                    {
-                        modelPath = Path.Combine(args[i+1]);
-                    }
-                }
-
-                i++;
-            }
-
-            if (string.IsNullOrEmpty(modelPath))
-            {
-                throw new Exception("Model path must be specified");
+                throw new Exception("Model path must be specified.");
             }
 
             Console.WriteLine("-------------");
-            Console.WriteLine("Hello, Phi!");
+            Console.WriteLine("Hello, Phi! To finalize program please enter '[EXIT]' string.");
             Console.WriteLine("-------------");
 
-            Console.WriteLine("Model path: " + modelPath);
-            Console.WriteLine("Intereactive: " + intereactive);
+            Console.WriteLine("Model path: " + opts.ModelPath);
 
-            var option = 2;
-            if (intereactive)
+            if (!Enum.TryParse(opts.Mode, out HelloPhi3Mode optionMode))
             {
-                Console.WriteLine("Please enter option number:");
-                Console.WriteLine("1. Complete Output");
-                Console.WriteLine("2. Streaming Output");
-                int.TryParse(Console.ReadLine(), out option);
+                Console.WriteLine("Error in mode. Please, enter a valid option.");
+                return;
             }
 
-            var optionMode = option == 1 ? HelloPhi3Mode.CompleteOutput : HelloPhi3Mode.StreamingOutput;
+            Console.WriteLine($"User input: {optionMode}");
+            Console.WriteLine();
+
+            string? prompt;
+            bool running = true;
+            int numPromptsCount = 1;
+
             do
             {
-                string prompt = "def is_prime(num):"; // Example prompt
-                if (intereactive)
-                {
-                    Console.WriteLine("Prompt:");
-                    prompt = Console.ReadLine();
-                }
+                Console.WriteLine($"{numPromptsCount} - Please, enter a prompt:");
+                numPromptsCount++;
 
-                if(string.IsNullOrEmpty(prompt))
-                {
-                    continue;
-                }
+                prompt = Console.ReadLine();
 
-                if (prompt.Equals("[EXIT]"))
+                if (string.IsNullOrEmpty(prompt))
                 {
-                    break;
+                    Console.WriteLine("Please, enter a valid option: ");
                 }
-
-                if(!string.IsNullOrEmpty(prompt))
+                else if (prompt.Equals("[EXIT]"))
                 {
-                    HelloPhi3.Run(modelPath, prompt, optionMode);
+                    running = false;
                 }
-            } 
-            while (intereactive);
+                else
+                {
+                    HelloPhi3.Run(opts.ModelPath, prompt, optionMode);
+                }
+            }
+            while (running);
 
             Console.WriteLine("Bye from Phi-3 demo!");
         }
+
+        private static void HandleParseError(IEnumerable errs)
+        {
+            Console.WriteLine("Command Line parameters provided were not valid!");
+        }
+
+        #endregion
     }
 }

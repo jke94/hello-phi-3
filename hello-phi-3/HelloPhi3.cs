@@ -14,27 +14,29 @@
 
     public class HelloPhi3
     {
-        public static void Run(string modelPath, string prompt, HelloPhi3Mode helloPhi3Mode)
+        public static void Run(string modelPath, string userPrompt, HelloPhi3Mode helloPhi3Mode)
         {
             if (string.IsNullOrEmpty(modelPath))
             {
                 throw new Exception("Model path must be specified");
             }
 
-            if (string.IsNullOrEmpty(prompt))
+            if (string.IsNullOrEmpty(userPrompt))
             {
                 return;
             }
 
             using Model model = new Model(modelPath);
             using Tokenizer tokenizer = new Tokenizer(model);
-
-            var sequences = tokenizer.Encode($"<|user|>{prompt}<|end|><|assistant|>");
-
             using GeneratorParams generatorParams = new GeneratorParams(model);
 
-            generatorParams.SetSearchOption("max_length", 200);
+            string systemPrompt = "You are an AI assistant that helps people find information. Answer questions using a direct style. Do not share more information that the requested by the users.";
+
+            var fullPrompt = $"<|system|>{systemPrompt}<|end|><|user|>{userPrompt}<|end|><|assistant|>";
+            var sequences = tokenizer.Encode(fullPrompt);
             generatorParams.SetInputSequences(sequences);
+
+            generatorParams.SetSearchOption("max_length", 300);
 
             if (helloPhi3Mode == HelloPhi3Mode.CompleteOutput)
             {
