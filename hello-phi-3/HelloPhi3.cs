@@ -27,16 +27,16 @@
             }
 
             using Model model = new Model(modelPath);
+
             using Tokenizer tokenizer = new Tokenizer(model);
             using GeneratorParams generatorParams = new GeneratorParams(model);
 
-            string systemPrompt = "You are an AI assistant that helps people find information. Answer questions using a direct style. Do not share more information that the requested by the users.";
-
-            var fullPrompt = $"<|system|>{systemPrompt}<|end|><|user|>{userPrompt}<|end|><|assistant|>";
+            var fullPrompt = $"<|user|>{userPrompt}<|end|><|assistant|>";
             var sequences = tokenizer.Encode(fullPrompt);
             generatorParams.SetInputSequences(sequences);
 
             generatorParams.SetSearchOption("max_length", 300);
+            generatorParams.SetSearchOption("past_present_share_buffer", false);
 
             if (helloPhi3Mode == HelloPhi3Mode.CompleteOutput)
             {
@@ -57,6 +57,7 @@
                     generator.GenerateNextToken();
                     Console.Write(tokenizerStream.Decode(generator.GetSequence(0)[^1]));
                 }
+
                 Console.WriteLine();
             }
         }
