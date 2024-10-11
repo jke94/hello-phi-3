@@ -45,7 +45,7 @@ dotnet build .\hello-phi-3.sln -c Release
 
 # B. Useful links
 
-- https://github.com/microsoft/onnxruntime-genai/tree/main/examples/csharp/HelloPhi
+- [Github: Generate() API C# example](https://github.com/microsoft/onnxruntime-genai/tree/main/examples/csharp/HelloPhi)
 
 - [Phi-3CookBook: Phi-3 Prompt Template](https://github.com/microsoft/Phi-3CookBook/blob/main/md/02.QuickStart/Huggingface_QuickStart.md)
 
