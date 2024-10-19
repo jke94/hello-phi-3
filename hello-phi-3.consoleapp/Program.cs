@@ -1,7 +1,8 @@
 ﻿namespace hello_phi_3.consoleapp
 {
     #region using
-
+    
+    using Microsoft.Extensions.Hosting;
     using CommandLine;
     using hello_phi_3;
     using System.Collections;
@@ -10,13 +11,22 @@
 
     public class Program
     {
+        public IHost? HostBuilder { get; set; }
+
         #region Public methods
 
         public static void Main(string[] args)
         {
-            Parser.Default.ParseArguments<CommandLineOptions>(args)
-                .WithParsed(Run)
-                .WithNotParsed(HandleParseError);
+            // Parser.Default.ParseArguments<CommandLineOptions>(args)
+            //     .WithParsed(Run)
+            //     .WithNotParsed(HandleParseError);
+
+            //     HostBuilder = Host.CreateDefaultBuilder(args)
+            //     .ConfigureServices(services =>
+            //     {
+            //         services.AddTransient<Driver>();
+            //     })
+            //     .Build();                
         }
 
         #endregion
@@ -66,7 +76,8 @@
                 }
                 else
                 {
-                    HelloPhi3.Run(opts.ModelPath, prompt, optionMode);
+                    IHelloPhi3Service helloPhi3 = new HelloPhi3Service();
+                    helloPhi3.Run(opts.ModelPath, prompt, optionMode);
                 }
             }
             while (running);

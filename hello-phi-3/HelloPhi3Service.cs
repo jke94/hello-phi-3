@@ -1,20 +1,24 @@
-﻿namespace hello_phi_3
-{
+namespace hello_phi_3
+{  
     #region using
 
     using Microsoft.ML.OnnxRuntimeGenAI;
 
     #endregion
 
-    public enum HelloPhi3Mode
+    public interface IHelloPhi3Service
     {
-        CompleteOutput = 0,
-        StreamingOutput = 1
+        public void Run(string modelPath, string userPrompt, HelloPhi3Mode helloPhi3Mode);
     }
 
-    public class HelloPhi3
+    public class HelloPhi3Service : IHelloPhi3Service
     {
-        public static void Run(string modelPath, string userPrompt, HelloPhi3Mode helloPhi3Mode)
+        public HelloPhi3Service()
+        {
+            
+        }
+
+        public void Run(string modelPath, string userPrompt, HelloPhi3Mode helloPhi3Mode)
         {
             if (string.IsNullOrEmpty(modelPath))
             {
