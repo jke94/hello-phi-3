@@ -27,7 +27,7 @@ pip install huggingface-hub[cli]
 Use case to be used in CPU environments.
 
 ```
-huggingface-cli download microsoft/Phi-3-mini-4k-instruct-onnx --include cpu_and_mobile/cpu-int4-rtn-block-32-acc-level-4/* --local-dir models
+huggingface-cli download microsoft/Phi-3-mini-4k-instruct-onnx --include cpu_and_mobile/cpu-int4-rtn-block-32-acc-level-4/* --local-dir models/microsoft/Phi-3-mini-4k-instruct-onnx
 ```
 ### 5. Build solution.
 
@@ -40,7 +40,7 @@ dotnet build .\hello-phi-3.sln -c Release
 ### 6. Run example:
 
 ```
-.\hello-phi-3.consoleapp\bin\Release\net8.0\hello-phi-3.consoleapp.exe -m .\models\cpu_and_mobile\cpu-int4-rtn-block-32-acc-level-4 -t StreamingOutput
+dotnet run --project .\hello-phi-3.consoleapp\hello-phi-3.consoleapp.csproj -c Release --model .\models\microsoft\Phi-3-mini-4k-instruct-onnx\cpu_and_mobile\cpu-int4-rtn-block-32-acc-level-4 --mode StreamingOutput
 ```
 
 # B. Useful links

@@ -16,6 +16,6 @@
   <ItemGroup>
     <ProjectReference Include="..\hello-phi-3\hello-phi-3.csproj" />
   </ItemGroup>
-
+  
 </Project>
  

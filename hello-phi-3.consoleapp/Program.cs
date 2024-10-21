@@ -4,9 +4,7 @@
     
     using Microsoft.Extensions.Hosting;
     using hello_phi_3;
-    using System.Collections;
     using Microsoft.Extensions.DependencyInjection;
-    using CommandLine;
 
     #endregion
 
@@ -20,10 +18,11 @@
             .ConfigureServices(services =>
             {
                 services.AddTransient<IMainService, MainService>();
+                services.AddTransient<IHelloPhi3Service, HelloPhi3Service>();
             }
             ).Build();
 
-            var myService = host.Services.GetRequiredService<MainService>();
+            var myService = host.Services.GetRequiredService<IMainService>();
             
             return await myService.RunAsync(args);
         }

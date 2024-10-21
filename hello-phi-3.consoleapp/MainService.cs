@@ -8,11 +8,30 @@ namespace hello_phi_3.consoleapp
 
     public interface IMainService
     {
+        #region Methods
+
         public Task<int> RunAsync(string[] args);
+
+        #endregion
     }
 
     public class MainService : IMainService
     {
+        #region Fields
+
+        private readonly IHelloPhi3Service _helloPhi3Service;
+
+        #endregion
+
+        #region Constructor
+
+        public MainService(IHelloPhi3Service helloPhi3Service)
+        {
+            _helloPhi3Service = helloPhi3Service;
+        }
+
+        #endregion
+
         public async Task<int> RunAsync(string [] args)
         {
             return await Parser.Default.ParseArguments<CommandLineOptions>(args)
@@ -30,6 +49,8 @@ namespace hello_phi_3.consoleapp
             },
             errs => Task.FromResult(-1));
         }
+
+        #region Private Methods
 
         private int RunPhi3(CommandLineOptions options)
         {
@@ -77,8 +98,7 @@ namespace hello_phi_3.consoleapp
                 }
                 else
                 {
-                    IHelloPhi3Service helloPhi3 = new HelloPhi3Service();
-                    helloPhi3.Run(options.ModelPath, prompt, optionMode);
+                    _helloPhi3Service.Run(options.ModelPath, prompt, optionMode);
                 }
             }
             while (running);
@@ -87,5 +107,7 @@ namespace hello_phi_3.consoleapp
 
             return 0;
         }
+
+        #endregion
     }
 }

@@ -8,16 +8,15 @@ namespace hello_phi_3
 
     public interface IHelloPhi3Service
     {
+        #region Methods
+
         public void Run(string modelPath, string userPrompt, HelloPhi3Mode helloPhi3Mode);
+
+        #endregion
     }
 
     public class HelloPhi3Service : IHelloPhi3Service
     {
-        public HelloPhi3Service()
-        {
-            
-        }
-
         public void Run(string modelPath, string userPrompt, HelloPhi3Mode helloPhi3Mode)
         {
             if (string.IsNullOrEmpty(modelPath))
