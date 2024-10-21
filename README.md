@@ -36,8 +36,9 @@ Use case to be used in CPU environments.
 ```
 dotnet build .\hello-phi-3.sln -c Release
 ```
+## B. Playing with Phi3 in CPU!
 
-### 6. Run example:
+### 1. Run example:
 
 ```
 dotnet run --project .\hello-phi-3.consoleapp\hello-phi-3.consoleapp.csproj -c Release --model .\models\microsoft\Phi-3-mini-4k-instruct-onnx\cpu_and_mobile\cpu-int4-rtn-block-32-acc-level-4 --mode StreamingOutput
